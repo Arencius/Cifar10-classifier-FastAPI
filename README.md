@@ -1,0 +1,1 @@
+Project for university "Advanced python programming" classes.
