@@ -14,11 +14,15 @@ def squeeze_and_excitation_block(input_block, filters, ratio=16):
 def conv_block(block_input,
                filters,
                kernel_size=3,
-               downsample=True):
+               downsample=True,
+               se_block=False):
     conv = Conv2D(filters, kernel_size,
-                  strides=2 if not downsample else 1,
+                  strides=2 if downsample else 1,
                   padding='same')(block_input)
     batch_norm = BatchNormalization()(conv)
     out = LeakyReLU(0.2)(batch_norm)
+
+    if se_block:
+        out = squeeze_and_excitation_block(out, filters)
 
     return out
