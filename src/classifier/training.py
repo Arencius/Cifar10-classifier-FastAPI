@@ -1,4 +1,3 @@
-import numpy as np
 import utils
 import config
 from model import build_model
@@ -12,4 +11,4 @@ history = cifar_classifier.fit(config.TRAIN_DATAGEN.flow(train_images, train_lab
                                callbacks=[config.EARLY_STOPPING, config.LR_SCHEDULER])
 
 cifar_classifier.evaluate(test_images, test_labels)
-cifar_classifier.save('cifar_model.h5')
+cifar_classifier.save('model.h5')
