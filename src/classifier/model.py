@@ -8,8 +8,12 @@ def build_model():
     model_input = Input((32, 32, 3))
     conv1 = conv_block(model_input, 64)
     conv2 = conv_block(conv1, 128)
-    conv3 = conv_block(conv2, 128)
-    conv4 = conv_block(conv3, 256, downsample=False)
+    conv3 = conv_block(conv2, 128,
+                       se_block=True)
+    conv4 = conv_block(conv3, 256,
+                       downsample=False,
+                       se_block=True)
+
     gap = GlobalAveragePooling2D()(conv4)
     out = Dense(units=10, activation='softmax')(gap)
 
